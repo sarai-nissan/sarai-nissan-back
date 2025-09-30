@@ -422,18 +422,14 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    additional: Schema.Attribute.String;
-    article: Schema.Attribute.UID;
-    categories: Schema.Attribute.String;
+    category: Schema.Attribute.JSON;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
-    image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
-    ingredients: Schema.Attribute.Text;
+    dropdown: Schema.Attribute.JSON;
+    dropdownTitle: Schema.Attribute.String;
+    enumeration: Schema.Attribute.JSON;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -441,12 +437,20 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
-    priceEU: Schema.Attribute.Decimal;
-    priceUS: Schema.Attribute.Decimal;
+    note1: Schema.Attribute.Text;
+    note2: Schema.Attribute.Text;
+    photo: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    price: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    size: Schema.Attribute.String;
+    sold: Schema.Attribute.Boolean;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    warning: Schema.Attribute.Text;
   };
 }
 

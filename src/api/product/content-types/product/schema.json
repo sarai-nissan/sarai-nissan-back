@@ -11,13 +11,19 @@
   },
   "pluginOptions": {},
   "attributes": {
+    "category": {
+      "type": "json"
+    },
     "name": {
       "type": "string"
     },
     "description": {
       "type": "text"
     },
-    "image": {
+    "price": {
+      "type": "string"
+    },
+    "photo": {
       "type": "media",
       "multiple": true,
       "allowedTypes": [
@@ -27,23 +33,29 @@
         "audios"
       ]
     },
-    "article": {
-      "type": "uid"
-    },
-    "priceUS": {
-      "type": "decimal"
-    },
-    "priceEU": {
-      "type": "decimal"
-    },
-    "categories": {
+    "dropdownTitle": {
       "type": "string"
     },
-    "ingredients": {
+    "dropdown": {
+      "type": "json"
+    },
+    "size": {
+      "type": "string"
+    },
+    "enumeration": {
+      "type": "json"
+    },
+    "note1": {
       "type": "text"
     },
-    "additional": {
-      "type": "string"
+    "note2": {
+      "type": "text"
+    },
+    "warning": {
+      "type": "text"
+    },
+    "sold": {
+      "type": "boolean"
     }
   }
 }
