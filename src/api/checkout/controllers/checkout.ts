@@ -8,8 +8,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 export default {
 	async create(ctx: Context) {
 		try {
-			const { basketItems, email, shippingCost, currency, taxAmount } =
-				ctx.request.body;
+			const { basketItems, email, shippingCost, taxAmount } = ctx.request.body;
 
 			const session = await stripe.checkout.sessions.create({
 				mode: "payment",
@@ -17,7 +16,7 @@ export default {
 					...basketItems.map(
 						(item: { name: string; price: number; quantity: number }) => ({
 							price_data: {
-								currency: currency,
+								currency: "usd",
 								product_data: {
 									name: item.name,
 								},
@@ -28,8 +27,8 @@ export default {
 					),
 					{
 						price_data: {
-							currency: currency,
-							product_data: { name: "Delivery" },
+							currency: "usd",
+							product_data: { name: "Shipping" },
 							unit_amount: shippingCost || 0,
 						},
 						quantity: 1,
@@ -38,8 +37,8 @@ export default {
 						? [
 								{
 									price_data: {
-										currency,
-										product_data: { name: "Tax" },
+										currency: "usd",
+										product_data: { name: "Sales Tax" },
 										unit_amount: taxAmount,
 									},
 									quantity: 1,
@@ -48,7 +47,7 @@ export default {
 						: []),
 				],
 				success_url: `${process.env.FRONTEND_URL}/thanksgiving?success=true`,
-				cancel_url: `${process.env.FRONTEND_URL}/basket`,
+				cancel_url: `${process.env.FRONTEND_URL}/cart`,
 				customer_email: email,
 			});
 
