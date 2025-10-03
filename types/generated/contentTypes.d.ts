@@ -384,7 +384,8 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    address: Schema.Attribute.String;
+    address1: Schema.Attribute.String;
+    address2: Schema.Attribute.String;
     basket: Schema.Attribute.JSON;
     city: Schema.Attribute.String;
     country: Schema.Attribute.String;
@@ -399,9 +400,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
     note: Schema.Attribute.Text;
-    orderStatus: Schema.Attribute.Enumeration<
-      ['Received', 'Shipped', 'Paid', 'Issues']
-    >;
+    phone: Schema.Attribute.String;
     postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     state: Schema.Attribute.String;

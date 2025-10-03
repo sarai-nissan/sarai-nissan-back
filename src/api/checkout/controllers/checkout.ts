@@ -46,7 +46,7 @@ export default {
 							]
 						: []),
 				],
-				success_url: `${process.env.FRONTEND_URL}/thanksgiving?success=true`,
+				success_url: `${process.env.FRONTEND_URL}/confirmation?success=true`,
 				cancel_url: `${process.env.FRONTEND_URL}/cart`,
 				customer_email: email,
 			});

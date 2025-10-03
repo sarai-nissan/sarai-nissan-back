@@ -23,7 +23,13 @@
     "lastName": {
       "type": "string"
     },
-    "address": {
+    "phone": {
+      "type": "string"
+    },
+    "address1": {
+      "type": "string"
+    },
+    "address2": {
       "type": "string"
     },
     "city": {
@@ -40,15 +46,6 @@
     },
     "basket": {
       "type": "json"
-    },
-    "orderStatus": {
-      "type": "enumeration",
-      "enum": [
-        "Received",
-        "Shipped",
-        "Paid",
-        "Issues"
-      ]
     },
     "note": {
       "type": "text"
