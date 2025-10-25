@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "admin_settings",
+  "info": {
+    "singularName": "admin-setting",
+    "pluralName": "admin-settings",
+    "displayName": "admin-setting"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "pin": {
+      "type": "string"
+    }
+  }
+}
