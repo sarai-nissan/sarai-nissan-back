@@ -47,8 +47,8 @@
     "basket": {
       "type": "json"
     },
-    "note": {
-      "type": "text"
+    "archived": {
+      "type": "boolean"
     }
   }
 }

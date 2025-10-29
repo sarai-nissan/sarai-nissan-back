@@ -448,6 +448,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   attributes: {
     address1: Schema.Attribute.String;
     address2: Schema.Attribute.String;
+    archived: Schema.Attribute.Boolean;
     basket: Schema.Attribute.JSON;
     city: Schema.Attribute.String;
     country: Schema.Attribute.String;
@@ -461,7 +462,6 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
-    note: Schema.Attribute.Text;
     phone: Schema.Attribute.String;
     postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
