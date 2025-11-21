@@ -4,7 +4,12 @@ export default [
 	{
 		name: "strapi::cors",
 		config: {
-			origin: ["https://sarai-nisan-front.vercel.app", "http://localhost:5173"],
+			origin: [
+				"https://sarai-nisan-front.vercel.app",
+				"https://www.sarainissan.com",
+				"https://sarainissan.com",
+				"http://localhost:5173",
+			],
 			methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
 			headers: ["Content-Type", "Authorization", "Origin", "Accept"],
 			credentials: true,
