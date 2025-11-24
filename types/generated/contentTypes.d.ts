@@ -515,6 +515,63 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiShippingOptionShippingOption
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'shipping_options';
+  info: {
+    displayName: 'shippingOption';
+    pluralName: 'shipping-options';
+    singularName: 'shipping-option';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    label: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::shipping-option.shipping-option'
+    > &
+      Schema.Attribute.Private;
+    price: Schema.Attribute.Decimal;
+    publishedAt: Schema.Attribute.DateTime;
+    type: Schema.Attribute.Enumeration<['US', 'International']>;
+    uid: Schema.Attribute.UID;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTaxTax extends Struct.CollectionTypeSchema {
+  collectionName: 'taxes';
+  info: {
+    displayName: 'tax';
+    pluralName: 'taxes';
+    singularName: 'tax';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tax.tax'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    taxPercent: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -1028,6 +1085,8 @@ declare module '@strapi/strapi' {
       'api::event.event': ApiEventEvent;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
+      'api::shipping-option.shipping-option': ApiShippingOptionShippingOption;
+      'api::tax.tax': ApiTaxTax;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

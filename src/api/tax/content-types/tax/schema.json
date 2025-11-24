@@ -1,0 +1,18 @@
+{
+  "kind": "collectionType",
+  "collectionName": "taxes",
+  "info": {
+    "singularName": "tax",
+    "pluralName": "taxes",
+    "displayName": "tax"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "taxPercent": {
+      "type": "decimal"
+    }
+  }
+}
