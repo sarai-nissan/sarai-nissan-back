@@ -47,7 +47,7 @@ export default {
 						: []),
 				],
 				success_url: `${process.env.FRONTEND_URL}/confirmation?success=true`,
-				cancel_url: `${process.env.FRONTEND_URL}/cart`,
+				cancel_url: `${process.env.FRONTEND_URL}/checkout`,
 				customer_email: email,
 			});
 
