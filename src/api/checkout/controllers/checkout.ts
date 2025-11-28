@@ -10,23 +10,25 @@ export default {
 		try {
 			const { basketItems, form, shippingCost, taxAmount } = ctx.request.body;
 
-			if (!form) {
-				return ctx.badRequest("Missing form data");
-			}
+			if (!form) return ctx.badRequest("Missing form data");
+
+			const stripeItems = basketItems.map((item: any) => ({
+				price_data: {
+					currency: "usd",
+					product_data: {
+						name: item.product?.name ?? "Item",
+						images: item.product?.photo ? [item.product.photo] : [],
+					},
+					unit_amount: Number(item.selectedPrice.replace("$", "")) * 100,
+				},
+				quantity: item.quantity,
+			}));
 
 			const session = await stripe.checkout.sessions.create({
 				mode: "payment",
+
 				line_items: [
-					...basketItems.map(
-						(item: { name: string; price: number; quantity: number }) => ({
-							price_data: {
-								currency: "usd",
-								product_data: { name: item.name },
-								unit_amount: item.price,
-							},
-							quantity: item.quantity,
-						})
-					),
+					...stripeItems,
 					{
 						price_data: {
 							currency: "usd",
