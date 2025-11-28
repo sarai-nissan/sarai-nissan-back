@@ -1,9 +1,9 @@
 module.exports = (config, { strapi }) => {
 	return async (ctx, next) => {
 		if (ctx.request.url.startsWith("/api/stripe/webhook")) {
-			const chunks: Buffer[] = [];
+			const chunks = [];
 
-			await new Promise<void>((resolve) => {
+			await new Promise((resolve) => {
 				ctx.req.on("data", (chunk) => chunks.push(chunk));
 				ctx.req.on("end", () => resolve());
 			});
