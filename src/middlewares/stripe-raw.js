@@ -1,4 +1,4 @@
-export default (config, { strapi }) => {
+module.exports = () => {
 	return async (ctx, next) => {
 		if (ctx.request.url.startsWith("/api/stripe/webhook")) {
 			const chunks = [];
