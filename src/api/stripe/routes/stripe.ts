@@ -4,12 +4,7 @@ module.exports = {
 			method: "POST",
 			path: "/stripe/webhook",
 			handler: "stripe.webhook",
-			config: {
-				auth: false,
-				bodyParser: {
-					enabled: false,
-				},
-			},
+			config: { auth: false },
 		},
 	],
 };

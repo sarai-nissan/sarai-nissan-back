@@ -1,29 +1,17 @@
 "use strict";
 
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
 module.exports = {
 	async webhook(ctx) {
-		const req = ctx.request;
-		const signature = req.headers["stripe-signature"];
+		const event = ctx.request.body;
 
-		let event;
-
-		try {
-			event = stripe.webhooks.constructEvent(
-				req.body,
-				signature,
-				process.env.STRIPE_WEBHOOK_SECRET
-			);
-		} catch (err) {
-			console.error("❌ Stripe webhook signature error:", err.message);
+		if (!event || !event.type) {
 			ctx.response.status = 400;
-			return { error: `Webhook Error: ${err.message}` };
+			return { error: "Invalid webhook" };
 		}
 
 		if (event.type === "checkout.session.completed") {
 			const session = event.data.object;
-			const metadata = session.metadata;
+			const metadata = session.metadata || {};
 
 			await strapi.entityService.create("api::order.order", {
 				data: {
@@ -38,7 +26,7 @@ module.exports = {
 					state: metadata.state,
 					postalCode: metadata.postalCode,
 					country: metadata.country,
-					basket: JSON.parse(metadata.basket),
+					basket: JSON.parse(metadata.basket || "[]"),
 					archived: false,
 					stripeSessionId: session.id,
 					stripePaymentStatus: session.payment_status,
