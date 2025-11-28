@@ -8,7 +8,11 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 export default {
 	async create(ctx: Context) {
 		try {
-			const { basketItems, email, shippingCost, taxAmount } = ctx.request.body;
+			const { basketItems, form, shippingCost, taxAmount } = ctx.request.body;
+
+			if (!form) {
+				return ctx.badRequest("Missing form data");
+			}
 
 			const session = await stripe.checkout.sessions.create({
 				mode: "payment",
@@ -17,9 +21,7 @@ export default {
 						(item: { name: string; price: number; quantity: number }) => ({
 							price_data: {
 								currency: "usd",
-								product_data: {
-									name: item.name,
-								},
+								product_data: { name: item.name },
 								unit_amount: item.price,
 							},
 							quantity: item.quantity,
@@ -46,13 +48,30 @@ export default {
 							]
 						: []),
 				],
+
+				metadata: {
+					email: form.email,
+					phone: form.phone,
+					firstName: form.firstName,
+					lastName: form.lastName,
+					delivery: form.delivery,
+					address1: form.address1,
+					address2: form.address2,
+					city: form.city,
+					state: form.state,
+					postalCode: form.postalCode,
+					country: form.country,
+					basket: JSON.stringify(basketItems),
+				},
+
 				success_url: `${process.env.FRONTEND_URL}/confirmation?success=true`,
 				cancel_url: `${process.env.FRONTEND_URL}/checkout`,
-				customer_email: email,
+				customer_email: form.email,
 			});
 
 			ctx.send({ id: session.id });
 		} catch (err: any) {
+			console.error("Checkout error:", err);
 			ctx.response.status = 500;
 			ctx.send({ error: err.message });
 		}

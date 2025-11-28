@@ -18,11 +18,11 @@ export default [
 	"strapi::security",
 	"strapi::poweredBy",
 	"strapi::query",
+	{
+		name: "global::stripe-raw",
+	},
 	"strapi::body",
 	"strapi::session",
 	"strapi::favicon",
 	"strapi::public",
-	{
-		name: "global::stripe-raw",
-	},
 ];
