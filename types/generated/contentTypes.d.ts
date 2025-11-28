@@ -466,6 +466,8 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     postalCode: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
     state: Schema.Attribute.String;
+    stripePaymentStatus: Schema.Attribute.String;
+    stripeSessionId: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

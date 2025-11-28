@@ -49,6 +49,12 @@
     },
     "archived": {
       "type": "boolean"
+    },
+    "stripeSessionId": {
+      "type": "string"
+    },
+    "stripePaymentStatus": {
+      "type": "string"
     }
   }
 }
