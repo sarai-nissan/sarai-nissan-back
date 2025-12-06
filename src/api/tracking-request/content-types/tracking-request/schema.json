@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tracking_requests",
+  "info": {
+    "singularName": "tracking-request",
+    "pluralName": "tracking-requests",
+    "displayName": "tracking-request"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "trackingNumber": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "stat": {
+      "type": "string"
+    },
+    "sentAt": {
+      "type": "datetime"
+    }
+  }
+}

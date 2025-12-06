@@ -55,6 +55,9 @@
     },
     "stripePaymentStatus": {
       "type": "string"
+    },
+    "trackingNumber": {
+      "type": "string"
     }
   }
 }

@@ -468,6 +468,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     state: Schema.Attribute.String;
     stripePaymentStatus: Schema.Attribute.String;
     stripeSessionId: Schema.Attribute.String;
+    trackingNumber: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -568,6 +569,38 @@ export interface ApiTaxTax extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     taxPercent: Schema.Attribute.Decimal;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiTrackingRequestTrackingRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'tracking_requests';
+  info: {
+    displayName: 'tracking-request';
+    pluralName: 'tracking-requests';
+    singularName: 'tracking-request';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::tracking-request.tracking-request'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    sentAt: Schema.Attribute.DateTime;
+    stat: Schema.Attribute.String;
+    trackingNumber: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1089,6 +1122,7 @@ declare module '@strapi/strapi' {
       'api::product.product': ApiProductProduct;
       'api::shipping-option.shipping-option': ApiShippingOptionShippingOption;
       'api::tax.tax': ApiTaxTax;
+      'api::tracking-request.tracking-request': ApiTrackingRequestTrackingRequest;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
