@@ -24,26 +24,34 @@ module.exports = {
 			}
 		);
 
-		// Prepare message text
+		const carrier = "USPS";
+		const trackingLink = `https://tools.usps.com/go/TrackConfirmAction?tLabels=${trackingNumber}`;
+
 		const message = `
-Hello!
+Hello,
 
-Your tracking number: ${trackingNumber}
+Your order has officially begun its journey to you.
 
-We have received your request and will process it soon.
+Here are your shipping details:
+Order Number: ${trackingNumber}
+Tracking Link: ${trackingLink}
+Carrier: ${carrier}
 
-Best regards,
-Your Support Team
-    `;
+If you have any questions or need help with anything at all, please contact sarainissanhelp@gmail.com
+
+Thank you endlessly for supporting my art and my work. I hope your new piece brings a little more light into your space.
+
+Sarai
+`;
 
 		try {
 			// Send email through Resend
 			await axios.post(
 				"https://api.resend.com/emails",
 				{
-					from: "Field-2 <help@sarainissan.com>",
+					from: "Shop Sarai Nissan <help@sarainissan.com>",
 					to: email,
-					subject: "Field 1",
+					subject: "Your Order Is On Its Way",
 					text: message,
 				},
 				{
